@@ -14,9 +14,10 @@ import * as path from 'path';
 import * as bodyparser from 'body-parser';
 import * as http from 'http';
 import * as App from 'express';
-import { appConfig } from './config';
+import { appConfig } from '@app/config';
+import { AppController } from '@app/controllers';
 
-const controllers:Function[] = [];
+const controllers:Function[] = [AppController];
 
 const middlewares:Function[] = [];
 
@@ -66,8 +67,6 @@ export class Application {
       cors,
       controllers,
       middlewares,
-      routePrefix: '/',
-      defaultErrorHandler: false,
     });
     let server;
     try {
