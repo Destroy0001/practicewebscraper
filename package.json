@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
-    "watch": "nodemon -e ts -w ./src -x npm run watch:serve | bunyan",
+    "watch": "nodemon -e ts -w ./src -x npm run watch:serve | bunyan"
   },
   "author": "",
   "license": "ISC",
