@@ -1,4 +1,4 @@
-#HOW TO SETUP THIS APPLICATION
+### SETUP
 
 You must have all dependencies preinstalled: 
 
