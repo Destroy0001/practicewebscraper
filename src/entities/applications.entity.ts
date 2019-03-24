@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class Category {
+export class Applications {
   @PrimaryGeneratedColumn({ type: 'integer' })
   id: number;
 

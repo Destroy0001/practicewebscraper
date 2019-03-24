@@ -16,6 +16,7 @@ import * as http from 'http';
 import * as App from 'express';
 import { appConfig } from '@app/config';
 import { AppController } from '@app/controllers';
+import { startCron } from '@app/crons';
 
 const controllers:Function[] = [AppController];
 
@@ -38,6 +39,7 @@ export class Application {
     useOrmContainer(Container);
     // establishing a connection with the database,
     // this always has to be below useOrmContainer
+
     try {
       console.log('Establishing database connection');
       await createDatabaseConnection();
@@ -47,6 +49,7 @@ export class Application {
       throw e;
     }
 
+    startCron();
     /**
      * We create a new server instance.
      * We could have also used createExpressServer here to attach controllers
