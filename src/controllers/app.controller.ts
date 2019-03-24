@@ -23,7 +23,12 @@ export class AppController {
       await this.appUtil.fetchListing();
     }
 
-    return await this.androidApplicationRepository.find();
+    const applications = await this.androidApplicationRepository.find();
+    return {
+      data: {
+        applications,
+      },
+    };
   }
 
   @Get('/:package')
@@ -31,11 +36,15 @@ export class AppController {
   public async detail(
     @Param('package') appPackage: string,
   ) {
-    const app = await this.androidApplicationRepository.findOne({ package:appPackage });
-    if (!app) {
+    const application = await this.androidApplicationRepository.findOne({ package:appPackage });
+    if (!application) {
       throw new NotFoundError('Application Details not found');
     }
 
-    return app;
+    return {
+      data: {
+        application,
+      },
+    };
   }
 }

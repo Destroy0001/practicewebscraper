@@ -1,1 +1,99 @@
-<h1> Showing Detail of App</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background: #ffffff
+        }
+
+        * {
+            border-radius: 0 !important;
+            color: #6c757d;
+            font-family: Arial, Helvetica, sans-serif !important;
+            box-sizing: border-box;
+            text-decoration: none;
+            line-height: 1.6 !important;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .application-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 95vw;
+            margin: auto;
+            padding: 16px;
+        }
+
+        .application-info {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .application-info .icon-container {
+            width: 176px;
+            height: 176px;
+        }
+
+        .application-info .icon-container .icon {
+            width: 160px;
+            height: 160px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .application-info .text {
+            display: flex;
+            flex-direction: column;
+            margin-left: 16px;
+        }
+
+        .application-info .text .title {
+            color: #666;
+            font-size: 2em;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .application-info .text .category {
+            display: block;
+        }
+
+        .application-description {
+            margin-top: 16px;
+            font-weight: lighter;
+            text-align: start;
+        }
+
+        .application-description b {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='application-wrapper'>
+            <div class='application-info'>
+                <div class='icon-container'>
+                    <img class='icon' src='{{data.application.iconUrl}}' />
+                </div>
+                <div class='text'>
+                    <span class='title'>{{data.application.name}}</span>
+                    <span class='category'>{{data.application.category}}</span>
+                </div>
+            </div>
+            {{#if data.application.trailerUrl}}
+            <iframe class='trailer' height='480px' src="{{data.application.trailerUrl}}"></iframe>
+            {{/if}}
+            <div class='application-description'> {{{data.application.description}}}</div>
+        </div>
+    </div>
+</body>
+
+</html>

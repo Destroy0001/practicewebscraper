@@ -5,11 +5,13 @@ import { HttpError } from 'routing-controllers';
 import { JSDOM as DOM } from 'jsdom';
 import { AndroidApplication } from '@app/entities';
 import { Repository } from 'typeorm';
+import { InjectRepository } from 'typeorm-typedi-extensions';
 
 @Service()
 export class AppUtil {
   constructor(
       private webscraperService:WebScraperService,
+      @InjectRepository(AndroidApplication)
       private androidApplicationRepository: Repository<AndroidApplication>,
   ) {}
 
@@ -74,10 +76,8 @@ export class AppUtil {
                        .getAttribute('content');
     app.iconUrl = document.querySelector('meta[itemprop="image"]')
                           .getAttribute('content');
-    app.description = document.querySelector('meta[itemprop="description"]')
-                              .getAttribute('content');
-    app.category = document.querySelector('meta[itemprop="applicationCategory"]')
-                           .getAttribute('content');
+    app.description = document.querySelector('div[itemprop="description"] content').innerHTML;
+    app.category = document.querySelector('a[itemprop="genre"]').textContent;
     const trailerNode =  document.querySelector('button[data-trailer-url]');
     if (trailerNode) {
       app.trailerUrl = trailerNode.getAttribute('data-trailer-url');

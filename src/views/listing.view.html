@@ -1,1 +1,109 @@
-<h1> Showing Listing of APPS</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background: #eeeeee
+        }
+
+        * {
+            border-radius: 0 !important;
+            color: #6c757d;
+            font-family: Arial, Helvetica, sans-serif !important;
+            box-sizing: border-box;
+            text-decoration: none;
+            line-height: 1.6 !important;
+        }
+
+        .top-header {
+            position: sticky;
+            z-index: 100;
+            background: #eeeeee;
+            top: 0px;
+            font-size: 1.8rem;
+            padding: 15px;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .application-list-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 95vw;
+            margin: auto;
+            justify-content: space-evenly;
+        }
+
+        .application {
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            position: relative;
+            vertical-align: top;
+            max-width: 176px;
+            height: 245px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            margin: 15px;
+            text-align: center;
+        }
+
+        .application .icon-container {
+            width: 176px;
+            height: 176px;
+        }
+
+        .application .icon-container .icon {
+            width: 160px;
+            height: 160px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .application .title {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 160px;
+            text-overflow: ellipsis;
+        }
+
+        .application .category {
+            font-size: 0.8rem;
+            line-height: 2;
+            color: #6c757d70;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='container'>
+        <div class='top-header'>
+            <h3 class='top-header-title'>
+                Top Free in Android Apps
+            </h3>
+            <a href="/apps?refresh=true" style="font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">&#x21bb;</a>
+        </div>
+        <div class='application-list-wrapper'>
+            {{#each data.applications}}
+            <a class='application card text-center p-1 m-1' href='/apps/{{package}}'>
+                <div class="icon-container">
+                    <img class='icon mx-auto' src='{{iconUrl}}' />
+                </div>
+                <h6 class='title card-title'>{{name}}</h6>
+                <span class='category card-text text-muted'>{{category}}</span>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</body>
+
+</html>
