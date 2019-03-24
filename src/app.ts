@@ -17,10 +17,11 @@ import * as App from 'express';
 import { appConfig } from '@app/config';
 import { AppController } from '@app/controllers';
 import { startCron } from '@app/crons';
+import { ErrorHandler } from '@app/middlewares/errorhandler.middleware';
 
 const controllers:Function[] = [AppController];
 
-const middlewares:Function[] = [];
+const middlewares:Function[] = [ErrorHandler];
 
 export class Application {
   private static instance: Application = new Application();
@@ -49,7 +50,7 @@ export class Application {
       throw e;
     }
 
-    startCron();
+    await startCron();
     /**
      * We create a new server instance.
      * We could have also used createExpressServer here to attach controllers
@@ -70,6 +71,7 @@ export class Application {
       cors,
       controllers,
       middlewares,
+      defaultErrorHandler: false,
     });
     let server;
     try {

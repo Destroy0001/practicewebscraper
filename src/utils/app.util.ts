@@ -11,9 +11,7 @@ export class AppUtil {
   constructor(
       private webscraperService:WebScraperService,
       private androidApplicationRepository: Repository<AndroidApplication>,
-  ) {
-
-  }
+  ) {}
 
   public async fetchListing() {
     const html = await this.webscraperService.scrape(APPLICATION_LIST_URL);
