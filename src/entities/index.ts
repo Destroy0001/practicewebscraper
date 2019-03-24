@@ -1,1 +1,1 @@
-export * from './applications.entity';
+export * from './androidApplication.entity';
