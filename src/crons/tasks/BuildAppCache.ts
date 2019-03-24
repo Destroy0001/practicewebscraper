@@ -26,9 +26,9 @@ export class AppCache {
       console.log('Building Application Cache');
       const apps = await this.appUtil.fetchListing();
       const endTime = new Date().getTime();
-      console.log(`Cinema Cache Built in ${(endTime - startTime) / 1000 } Seconds`);
+      console.log(`Application Cache Built in ${(endTime - startTime) / 1000 } Seconds`);
     }catch (e) {
-      console.error('Could not build Cache, it will be built manually');
+      console.error('Could not Application build Cache');
       console.log(e);
     }
   }

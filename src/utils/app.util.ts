@@ -29,18 +29,34 @@ export class AppUtil {
     const { document } = window;
     const appNodeList:NodeListOf<Element> = document.querySelectorAll('.card.apps');
     const appNodeArray = Array.from(appNodeList);
-    const apps:AndroidApplication[] = [];
+    let  newApps:AndroidApplication[] = [];
+    const oldApps:AndroidApplication[] = [];
 
     for (const element in appNodeArray) {
       const appPackage = appNodeList[element].getAttribute('data-docid');
       const app = await this.androidApplicationRepository
             .findOne({ package:appPackage }) || new AndroidApplication();
 
-      app.package = appPackage;
-      apps.push(app);
+      // differentiating between old and new apps
+      // so that all apps aren't rescraped
+      // and only the new ones are
+      if (app.id) {
+        oldApps.push(app);
+      }else {
+        app.package = appPackage;
+        newApps.push(app);
+      }
     }
 
-    return await Promise.all(apps.map(app => this.fetchDetail(app)));
+    // promise.all will executes these requests parallelly,
+    // instead of the regular await this.fetchDetail
+    // which will only get the second request when the first request is completed
+    // as the next promise goes into the then of the last promise
+    // this improves speed
+    if (newApps.length) {
+      newApps = await Promise.all(newApps.map(app => this.fetchDetail(app)));
+    }
+    return [...oldApps, ...newApps];
   }
 
   private async fetchDetail(app:AndroidApplication) {
@@ -71,10 +87,11 @@ export class AppUtil {
 
     const screenshotListNode = document.querySelectorAll('button[data-screenshot-item-index] img');
     const screenshotList:{urls:string[]} = { urls: [] };
+    // TODO: the images are loaded asynchronously,
+    // find a fix to that later
     screenshotListNode.forEach((screenshotNode:Element) => {
       const screenshotUrl = screenshotNode.getAttribute('src');
       if (screenshotUrl) {
-        console.log(app.package, screenshotUrl);
         screenshotList.urls.push(screenshotUrl);
       }
     });
