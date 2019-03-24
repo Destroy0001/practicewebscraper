@@ -1,1 +1,39 @@
-Error Occured!
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' rel='stylesheet'>
+    <style>
+        body {
+            background: #ffffff
+        }
+
+        * {
+            border-radius: 0 !important;
+            color: #6c757d;
+            font-family: Arial, Helvetica, sans-serif !important;
+            box-sizing: border-box;
+            text-decoration: none;
+            line-height: 1.6 !important;
+            text-align:  center;
+        }
+
+        .error-heading {
+           font-size: 3em;
+           color: #000;
+        }
+
+        .error-message {
+           font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class='error-heading'> Http Status {{httpCode}} Encountered</h1>
+    <h5 class='error-message'>  {{ message }}</h5>
+</body>
+
+</html>

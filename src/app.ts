@@ -51,6 +51,7 @@ export class Application {
     }
 
     await startCron();
+
     /**
      * We create a new server instance.
      * We could have also used createExpressServer here to attach controllers

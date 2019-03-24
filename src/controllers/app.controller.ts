@@ -4,7 +4,7 @@ import { AndroidApplication } from '@app/entities';
 import { AppUtil } from '@app/utils/app.util';
 import { InjectRepository } from 'typeorm-typedi-extensions';
 
-@Controller('/apps')
+@Controller('')
 export class AppController {
   constructor(
       @InjectRepository(AndroidApplication)
@@ -31,11 +31,16 @@ export class AppController {
     };
   }
 
-  @Get('/:package')
+  @Get('/details')
   @Render('detail.view.html')
   public async detail(
-    @Param('package') appPackage: string,
+    @QueryParam('package') appPackage: string,
   ) {
+
+    if (!appPackage) {
+      throw new NotFoundError('Application Details not found');
+    }
+
     const application = await this.androidApplicationRepository.findOne({ package:appPackage });
     if (!application) {
       throw new NotFoundError('Application Details not found');

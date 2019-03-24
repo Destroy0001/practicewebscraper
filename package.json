@@ -6,20 +6,13 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/app.ts",
     "watch": "nodemon -e ts -w ./src -x npm run watch:serve | bunyan",
-    "watch:serve": " NODE_ENV=development npm start| bunyan",
-    "migration:generate": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:generate -n migration -d  migrations",
-    "migration:create": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:create -n migration -d migrations",
-    "migration:up": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:run",
-    "migration:down": "./node_modules/.bin/ts-node ./node_modules/.bin/typeorm migration:revert"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/axios": "^0.14.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "bunyan": "^1.8.12",
-    "compression": "^1.7.3",
     "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
@@ -28,17 +21,16 @@
     "jsdom": "^14.0.0",
     "moment": "^2.24.0",
     "multer": "^1.4.1",
-    "node-cache": "^4.2.0",
     "node-cron": "^2.0.3",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "0.7.7",
     "sql.js": "^0.5.0",
     "typedi": "^0.8.0",
     "typeorm": "0.2.11",
-    "typeorm-typedi-extensions": "^0.2.3",
-    "uuid": "^3.3.2"
+    "typeorm-typedi-extensions": "^0.2.3"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/body-parser": "^1.17.0",
     "@types/bunyan": "^1.8.5",
     "@types/compression": "0.0.36",
